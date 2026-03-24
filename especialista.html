@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal del Especialista — Sistema Médico</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="page-background"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <span class="eyebrow">Portal del Especialista</span>
+        <a href="index.html" class="btn btn-secondary">← Volver al inicio</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Login ─────────────────────────────────────────────────────────── -->
+    <section id="loginSection" class="section section-fullscreen">
+      <div class="container">
+        <div class="glass fade-in-up login-card">
+          <div class="login-header">
+            <p class="eyebrow">Acceso especialista</p>
+            <h2>Iniciar sesión</h2>
+            <p>Ingresa tus credenciales asignadas por el administrador.</p>
+          </div>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginUser">Usuario</label>
+              <input type="text" id="loginUser" required autocomplete="username" placeholder="Tu usuario" />
+            </div>
+            <div class="form-group">
+              <label for="loginPass">Contraseña</label>
+              <input type="password" id="loginPass" required autocomplete="current-password" placeholder="Tu contraseña" />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+            </div>
+            <p id="loginError" class="helper-text error-text"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel del especialista ─────────────────────────────────────────── -->
+    <section id="especialistaPanel" class="section section-block hidden">
+      <div class="container">
+
+        <!-- Header -->
+        <div class="admin-panel-header fade-in-up">
+          <div>
+            <p class="eyebrow" id="espPanelEspecialidad">Especialidad</p>
+            <h2 id="espPanelNombre">Dr. Nombre</h2>
+          </div>
+          <button id="logoutBtn" class="btn btn-secondary">Cerrar sesión</button>
+        </div>
+
+        <!-- Calendario -->
+        <div class="fade-in-up">
+
+          <div class="cal-toolbar">
+            <div class="cal-nav">
+              <button id="calPrevBtn" class="btn btn-secondary cal-nav-btn">&#8249;</button>
+              <span id="calMonthLabel" class="cal-month-label">Cargando…</span>
+              <button id="calNextBtn" class="btn btn-secondary cal-nav-btn">&#8250;</button>
+            </div>
+          </div>
+
+          <div class="glass cal-grid-wrapper">
+            <div class="cal-weekdays">
+              <span>Dom</span><span>Lun</span><span>Mar</span>
+              <span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+            </div>
+            <div id="calGrid" class="cal-grid"></div>
+          </div>
+
+          <!-- Detalle de día (solo confirmar/revertir, sin eliminar) -->
+          <div id="calDayDetail" class="glass hidden" style="margin-top: 20px; padding: 28px;">
+            <div class="day-detail-header">
+              <h3 id="calDayDetailTitle"></h3>
+              <button id="calDayDetailClose" class="btn btn-secondary btn-sm">Cerrar</button>
+            </div>
+            <div class="table-wrapper" style="margin-top: 16px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Hora</th>
+                    <th>Paciente</th>
+                    <th>Servicio</th>
+                    <th>Motivo</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="calDayDetailList"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/especialista-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración — Sistema Médico</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="page-background"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <span class="eyebrow">Panel de Administración</span>
+        <a href="index.html" class="btn btn-secondary">← Volver al inicio</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Login ─────────────────────────────────────────────────────────── -->
+    <section id="loginSection" class="section section-fullscreen">
+      <div class="container">
+        <div class="glass fade-in-up login-card">
+          <div class="login-header">
+            <p class="eyebrow">Acceso restringido</p>
+            <h2>Panel Admin</h2>
+            <p>Ingresa tus credenciales para continuar.</p>
+          </div>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginUser">Usuario</label>
+              <input type="text" id="loginUser" required autocomplete="username" placeholder="Ingresa tu usuario" />
+            </div>
+            <div class="form-group">
+              <label for="loginPass">Contraseña</label>
+              <input type="password" id="loginPass" required autocomplete="current-password" placeholder="Ingresa tu contraseña" />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+            </div>
+            <p id="loginError" class="helper-text error-text"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel admin ────────────────────────────────────────────────────── -->
+    <section id="adminPanel" class="section section-block hidden">
+      <div class="container">
+
+        <!-- Header -->
+        <div class="admin-panel-header fade-in-up">
+          <div>
+            <p class="eyebrow">Bienvenido, Admin</p>
+            <h2>Sistema de Citas Médicas</h2>
+          </div>
+          <button id="logoutBtn" class="btn btn-secondary">Cerrar sesión</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs fade-in-up">
+          <button class="admin-tab active" data-tab="calendario">Calendario</button>
+          <button class="admin-tab" data-tab="especialidades">Especialidades</button>
+          <button class="admin-tab" data-tab="especialistas">Especialistas</button>
+        </div>
+
+        <p id="adminMessage" class="helper-text" style="margin-bottom: 16px;"></p>
+
+        <!-- ── Tab: Calendario ──────────────────────────────────────────── -->
+        <div id="tab-calendario" class="tab-panel fade-in-up">
+
+          <div class="cal-toolbar">
+            <div class="cal-nav">
+              <button id="calPrevBtn" class="btn btn-secondary cal-nav-btn">&#8249;</button>
+              <span id="calMonthLabel" class="cal-month-label">Cargando…</span>
+              <button id="calNextBtn" class="btn btn-secondary cal-nav-btn">&#8250;</button>
+            </div>
+            <div class="filter-group">
+              <label for="calFilterEspecialista">Filtrar por especialista</label>
+              <select id="calFilterEspecialista" style="min-width: 220px;">
+                <option value="">Todos los especialistas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="glass cal-grid-wrapper">
+            <div class="cal-weekdays">
+              <span>Dom</span><span>Lun</span><span>Mar</span>
+              <span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+            </div>
+            <div id="calGrid" class="cal-grid"></div>
+          </div>
+
+          <div id="calDayDetail" class="glass hidden" style="margin-top: 20px; padding: 28px;">
+            <div class="day-detail-header">
+              <h3 id="calDayDetailTitle"></h3>
+              <div class="day-detail-actions">
+                <button id="dayDeleteSelectedBtn" class="btn btn-danger btn-sm" disabled>Eliminar seleccionadas</button>
+                <button id="calDayDetailClose"    class="btn btn-secondary btn-sm">Cerrar</button>
+              </div>
+            </div>
+            <div class="table-wrapper" style="margin-top: 16px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="col-check">
+                      <input type="checkbox" id="daySelectAllCheck" class="admin-checkbox" title="Seleccionar todas" />
+                    </th>
+                    <th>Paciente</th>
+                    <th>Especialista</th>
+                    <th>Servicio</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="calDayDetailList"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Tab: Especialidades ──────────────────────────────────────── -->
+        <div id="tab-especialidades" class="tab-panel hidden fade-in-up">
+
+          <div class="glass admin-table-card" style="margin-bottom: 24px;">
+            <h3 id="espFormTitle" style="margin-bottom: 20px;">Nueva especialidad</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="espNombreInput">Nombre</label>
+                <input type="text" id="espNombreInput" placeholder="Ej: Nutriología" />
+              </div>
+              <div class="form-group">
+                <label for="espDescInput">Descripción (opcional)</label>
+                <input type="text" id="espDescInput" placeholder="Breve descripción" />
+              </div>
+            </div>
+            <div class="form-actions" style="display:flex; gap:10px;">
+              <button id="espFormSubmit" class="btn btn-primary">Agregar especialidad</button>
+              <button id="espFormCancel" class="btn btn-secondary hidden">Cancelar</button>
+            </div>
+            <p id="espFormError" class="helper-text error-text"></p>
+          </div>
+
+          <div class="glass admin-table-card">
+            <h3 style="margin-bottom: 20px;">Especialidades registradas</h3>
+            <div id="espList"></div>
+          </div>
+
+        </div>
+
+        <!-- ── Tab: Especialistas ───────────────────────────────────────── -->
+        <div id="tab-especialistas" class="tab-panel hidden fade-in-up">
+
+          <div style="margin-bottom: 20px;">
+            <button id="newEspecialistaBtn" class="btn btn-primary">+ Nuevo especialista</button>
+          </div>
+
+          <div class="glass admin-table-card">
+            <h3 style="margin-bottom: 20px;">Especialistas registrados</h3>
+            <div id="espList2"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Modal: confirmación ────────────────────────────────────────────────── -->
+  <div id="confirmModal" class="modal hidden">
+    <div class="modal-backdrop" id="confirmModalBackdrop"></div>
+    <div class="modal-content glass confirm-modal-content">
+      <div class="confirm-modal-icon" id="confirmModalIcon">⚠️</div>
+      <h3 id="confirmModalTitle">¿Confirmar acción?</h3>
+      <p id="confirmModalMessage">Esta acción no se puede deshacer.</p>
+      <div class="confirm-modal-actions">
+        <button id="confirmModalCancel" class="btn btn-secondary">Cancelar</button>
+        <button id="confirmModalOk"     class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Modal: especialista ────────────────────────────────────────────────── -->
+  <div id="especialistaModal" class="modal hidden">
+    <div class="modal-backdrop" id="espModalBackdrop"></div>
+    <div class="modal-content glass esp-modal-content">
+      <div class="modal-header">
+        <h3 id="espModalTitle">Nuevo especialista</h3>
+        <button id="espModalClose" class="modal-close">&#10005;</button>
+      </div>
+
+      <div class="form-grid" style="margin-top: 8px;">
+        <div class="form-group">
+          <label for="espNombre">Nombre completo</label>
+          <input type="text" id="espNombre" placeholder="Dr. Juan Pérez" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="espEspecialidad">Especialidad</label>
+          <select id="espEspecialidad">
+            <option value="" disabled selected>Selecciona una especialidad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="espUsername">Usuario de acceso</label>
+          <input type="text" id="espUsername" placeholder="j.perez" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="espPassword">Contraseña</label>
+          <input type="password" id="espPassword" placeholder="••••••" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <h4 style="margin-bottom: 16px; color: var(--text-primary);">Horario de trabajo</h4>
+        <div id="scheduleForm" class="schedule-grid"></div>
+      </div>
+
+      <div class="form-actions" style="margin-top: 28px;">
+        <button id="espModalSave" class="btn btn-primary btn-full">Guardar especialista</button>
+      </div>
+      <p id="espModalError" class="helper-text error-text" style="margin-top: 10px; text-align:center;"></p>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin-page.js"></script>
+</body>
+</html>

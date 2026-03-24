@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citas Médicas — Agendar tu cita</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="page-background"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <span class="eyebrow">Sistema de citas médicas</span>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="especialista.html" class="btn btn-secondary btn-admin">Acceso Especialista</a>
+          <a href="admin.html"        class="btn btn-secondary btn-admin">Panel Admin</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="section section-fullscreen">
+      <div class="container">
+        <div class="hero-grid fade-in-up">
+          <div>
+            <p class="eyebrow">Gestión de citas</p>
+            <h1>Agenda tu cita médica fácilmente</h1>
+            <p>Selecciona la especialidad, el especialista y el horario que prefieras.</p>
+            <div class="hero-actions" style="margin-top: 32px;">
+              <a href="#booking" class="btn btn-primary">Agendar cita</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="section section-block">
+      <div class="container">
+        <div class="section-title fade-in-up">
+          <p class="eyebrow">Reservar</p>
+          <h2>Selecciona tu cita</h2>
+          <p>Elige la especialidad, el especialista y el día que deseas atenderte.</p>
+        </div>
+
+        <div class="booking-layout glass fade-in-up booking-card">
+
+          <!-- Paso 1: Especialidad -->
+          <div class="form-group">
+            <label for="bookingEspecialidad">Especialidad</label>
+            <select id="bookingEspecialidad">
+              <option value="" disabled selected>Selecciona una especialidad</option>
+            </select>
+          </div>
+
+          <!-- Paso 2: Especialista (se muestra al seleccionar especialidad) -->
+          <div id="especialistaGroup" class="form-group hidden">
+            <label for="bookingEspecialista">Especialista</label>
+            <select id="bookingEspecialista">
+              <option value="" disabled selected>Selecciona un especialista</option>
+            </select>
+          </div>
+
+          <!-- Paso 3: Fecha (se muestra al seleccionar especialista) -->
+          <div id="fechaGroup" class="form-group hidden">
+            <label for="bookingDate">Fecha</label>
+            <input type="date" id="bookingDate" />
+          </div>
+
+          <p id="selectedDateText" class="helper-text">Selecciona una especialidad para comenzar.</p>
+
+          <div class="form-actions" style="margin-top: 20px;">
+            <button id="openSlotsBtn" class="btn btn-primary" disabled>Ver horarios disponibles</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de horarios -->
+  <div id="slotsModal" class="modal hidden">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Horarios disponibles</p>
+          <h3 id="modalTitle">Selecciona un horario</h3>
+        </div>
+        <button id="closeModalBtn" class="modal-close">&#10005;</button>
+      </div>
+
+      <div id="slotsContainer" class="slots-grid"></div>
+
+      <form id="reservationForm" class="reservation-form hidden">
+        <h4>Confirmar cita</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="customerName">Nombre del paciente</label>
+            <input type="text" id="customerName" required placeholder="Ej: María García" />
+          </div>
+          <div class="form-group">
+            <label for="selectedSlot">Horario seleccionado</label>
+            <input type="text" id="selectedSlot" readonly />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="motivoConsulta">Motivo de consulta</label>
+          <input type="text" id="motivoConsulta" placeholder="Describe brevemente el motivo (opcional)" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Confirmar cita</button>
+        </div>
+
+        <p id="reservationFeedback" class="helper-text"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
