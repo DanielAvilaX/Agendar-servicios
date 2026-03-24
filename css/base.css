@@ -1,0 +1,270 @@
+:root {
+  --text-primary: #f0f4ff;
+  --text-secondary: #8b95b5;
+  --text-muted: #6b7a9e;
+  --container: 1280px;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.32);
+  --success: #69dba5;
+  --danger: #ff6b6b;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text-primary);
+  background: #0a0f1e;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--success);
+  color: #0a0f1e;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid var(--border-soft);
+}
+
+.btn-danger {
+  background: rgba(255, 107, 107, 0.15);
+  color: var(--danger);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b95b5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+select:focus {
+  border-color: var(--success);
+}
+
+select option {
+  background: #0e1425;
+  color: var(--text-primary);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus {
+  border-color: var(--success);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-muted);
+}
+
+nav {
+  position: relative;
+  z-index: 10;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.helper-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  width: min(92%, var(--container));
+  margin: 0 auto;
+}
+
+.section {
+  position: relative;
+  z-index: 2;
+}
+
+.section-block {
+  padding: 92px 0;
+}
+
+.section-fullscreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--text-secondary);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 12px;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.18;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+p {
+  color: var(--text-muted);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.error-text {
+  color: var(--danger) !important;
+}
+
+.login-card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.login-header {
+  margin-bottom: 28px;
+}
+
+.admin-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.admin-actions-card {
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.admin-actions-card h3 {
+  margin-bottom: 20px;
+}
+
+.admin-table-card {
+  padding: 28px;
+}
+
+.form-group-inline {
+  margin: 0;
+  min-width: 200px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 200px;
+}
+
+.filter-group label {
+  margin-bottom: 0;
+}
+
+.btn-admin {
+  font-size: 0.85rem;
+  padding: 8px 18px;
+}

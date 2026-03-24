@@ -1,0 +1,341 @@
+/*
+ * responsive.css
+ * Sistema de breakpoints:
+ *   lg  = 1024px  (tablet landscape)
+ *   md  =  768px  (tablet / teléfono grande)
+ *   sm  =  640px  (teléfono)
+ *   xs  =  480px  (teléfono pequeño)
+ */
+
+/* ════════════════════════════════════════════
+   LG — Tablet landscape (≤ 1024px)
+════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  /* Formularios de 2 columnas pasan a 1 */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Slots: de 3 a 2 columnas */
+  .slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ════════════════════════════════════════════
+   MD — Tablet / teléfono grande (≤ 768px)
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Contenedor ── */
+  .container {
+    width: min(96%, var(--container));
+  }
+
+  /* ── Secciones ── */
+  .section-block      { padding: 64px 0; }
+  .section-fullscreen { min-height: 100dvh; }
+
+  /* ── Nav ── */
+  .nav-wrapper {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ── Tipografía ── */
+  h1 { font-size: clamp(2.2rem, 7vw, 4rem); }
+  h2 { font-size: clamp(1.7rem, 5vw, 2.6rem); }
+
+  /* ── Hero ── */
+  .hero-grid   { grid-template-columns: 1fr; }
+  .hero-actions { flex-wrap: wrap; gap: 10px; }
+
+  /* ── Login card ── */
+  .login-card { padding: 32px 24px; }
+
+  /* ── Admin / especialista: header del panel ── */
+  .admin-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  /* ── Tabs: scroll horizontal ── */
+  .admin-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .admin-tabs::-webkit-scrollbar { display: none; }
+  .admin-tab { flex-shrink: 0; padding: 10px 18px; font-size: 0.85rem; }
+
+  /* ── Calendario: toolbar ── */
+  .cal-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .cal-nav { justify-content: center; }
+  .cal-month-label {
+    min-width: auto;
+    font-size: 1rem;
+  }
+  .filter-group              { width: 100%; }
+  .filter-group select       { width: 100%; min-width: 0 !important; }
+  #calFilterEspecialista     { min-width: 0 !important; width: 100%; }
+
+  /* ── Calendario: grid más compacto ── */
+  .cal-grid-wrapper  { padding: 14px; }
+  .cal-weekdays span { font-size: 0.7rem; padding: 6px 0; }
+  .cal-day {
+    min-height: 62px;
+    padding: 6px 5px;
+  }
+  .cal-day-num              { font-size: 0.82rem; margin-bottom: 4px; }
+  .cal-day--today .cal-day-num {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+  .cal-event-count { font-size: 0.7rem; padding: 1px 6px; }
+
+  /* ── Detalle de día ── */
+  .day-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .day-detail-actions {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+  .day-detail-actions .btn { flex: 1; }
+
+  /* ── Tablas: scroll horizontal en pantallas pequeñas ── */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── Booking layout ── */
+  .booking-card   { padding: 24px; }
+
+  /* ── Modal → bottom sheet en mobile ── */
+  .modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 24px 20px;
+  }
+  /* El confirm modal permanece centrado y compacto */
+  .confirm-modal-content {
+    width: calc(100% - 32px);
+    max-width: 400px;
+    border-radius: var(--radius-lg);
+    align-self: center;
+    margin: auto;
+    max-height: none;
+  }
+
+  /* ── Toolbar de tabla (admin) ── */
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .table-actions         { flex-wrap: wrap; gap: 8px; }
+  .table-actions .btn    { flex: 1; min-width: 140px; font-size: 0.82rem; }
+
+  /* ── Tarjetas de especialidad / especialista ── */
+  .specialty-card,
+  .specialist-card   { flex-wrap: wrap; }
+  .specialty-actions,
+  .specialist-actions { width: 100%; justify-content: flex-end; margin-top: 4px; }
+
+  /* ── Appointment rows ── */
+  .appointment-row { gap: 10px; }
+  .appt-specialist { display: none; } /* se ve en la tabla del detalle */
+
+  /* ── Formulario de horario del especialista ── */
+  .schedule-row      { flex-wrap: wrap; gap: 8px; }
+  .schedule-hours    { width: 100%; }
+  .schedule-hours select { min-width: 90px; flex: 1; }
+
+  /* ── Admin table card ── */
+  .admin-table-card { padding: 20px; }
+
+  /* ── Esp modal content ── */
+  .esp-modal-content { padding: 24px 18px; }
+}
+
+
+/* ════════════════════════════════════════════
+   SM — Teléfono (≤ 640px)
+════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* ── Secciones ── */
+  .section-block { padding: 48px 0; }
+
+  /* ── Nav: botones apilados ── */
+  .nav-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-wrapper .eyebrow  { margin-bottom: 4px; }
+  .nav-wrapper > div,
+  .nav-wrapper > a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* ── Login card ── */
+  .login-card { padding: 24px 16px; }
+  .login-header { margin-bottom: 20px; }
+
+  /* ── Booking: botón full-width ── */
+  #openSlotsBtn { width: 100%; }
+
+  /* ── Calendario: celdas mínimas ── */
+  .cal-grid-wrapper  { padding: 10px 8px; }
+  .cal-weekdays span { font-size: 0.62rem; letter-spacing: 0; padding: 5px 0; }
+  .cal-day {
+    min-height: 52px;
+    padding: 4px 3px;
+  }
+  .cal-day-num { font-size: 0.76rem; margin-bottom: 2px; }
+  .cal-day--today .cal-day-num {
+    width: 22px;
+    height: 22px;
+    font-size: 0.74rem;
+  }
+  .cal-nav-btn { padding: 8px 12px !important; font-size: 1.1rem !important; }
+  .cal-month-label { font-size: 0.95rem; min-width: 160px; }
+
+  /* ── Detalle de día ── */
+  .day-detail-header h3   { font-size: 1rem; }
+  .day-detail-actions     { flex-wrap: wrap; }
+  .day-detail-actions .btn {
+    font-size: 0.78rem !important;
+    padding: 7px 10px !important;
+  }
+
+  /* ── Slots: 2 columnas ── */
+  .slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .slot-btn { padding: 12px 6px; font-size: 0.85rem; border-radius: 12px; }
+
+  /* ── Modal confirm: acciones apiladas ── */
+  .confirm-modal-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .confirm-modal-actions .btn { width: 100%; }
+
+  /* ── Tabs ── */
+  .admin-tab { padding: 9px 14px; font-size: 0.8rem; }
+
+  /* ── Header del panel ── */
+  .admin-panel-header h2 { font-size: 1.5rem; }
+
+  /* ── Tarjetas ── */
+  .specialty-card,
+  .specialist-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .specialty-actions,
+  .specialist-actions {
+    width: 100%;
+    gap: 8px;
+  }
+  .specialty-actions .btn,
+  .specialist-actions .btn { flex: 1; }
+
+  /* ── Booking padding ── */
+  .booking-card { padding: 16px; }
+
+  /* ── Admin table card ── */
+  .admin-table-card { padding: 14px; }
+
+  /* ── Paneles con padding inline ── */
+  #calDayDetail           { padding: 16px !important; }
+  .esp-modal-content      { padding: 18px 14px; }
+
+  /* ── Reservation form ── */
+  .reservation-form { padding: 18px; }
+
+  /* ── Formulario de horario ── */
+  .schedule-check-label { min-width: auto; }
+  .schedule-hours {
+    padding-left: 8px;
+    border-left: 2px solid var(--border-soft);
+  }
+
+  /* ── Hero ── */
+  .hero-grid   { padding: 0; }
+  .hero-actions .btn { min-width: 140px; }
+}
+
+
+/* ════════════════════════════════════════════
+   XS — Teléfono pequeño (≤ 480px)
+════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* ── Tipografía ── */
+  h1 { font-size: clamp(1.8rem, 9vw, 2.6rem); }
+  h2 { font-size: clamp(1.4rem, 7vw, 1.9rem); }
+  h3 { font-size: 1.05rem; }
+
+  /* ── Calendario: ultra-compacto ── */
+  .cal-grid-wrapper { padding: 8px 6px; }
+  .cal-day {
+    min-height: 44px;
+    padding: 3px 2px;
+  }
+  .cal-day-num       { font-size: 0.7rem; }
+  .cal-weekdays span { font-size: 0.58rem; }
+  .cal-event-count   {
+    font-size: 0.64rem;
+    padding: 1px 4px;
+  }
+
+  /* ── Slots: 2 columnas ── */
+  .slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* ── Especialista modal: padding mínimo ── */
+  .esp-modal-content { padding: 18px 14px; }
+
+  /* ── Form grid ya es 1 col, reducir gap ── */
+  .form-group { margin-bottom: 12px; }
+
+  /* ── Booking layout ── */
+  .booking-card { padding: 12px; }
+
+  /* ── Login card ── */
+  .login-card { padding: 20px 14px; }
+
+  /* ── Buttons en acciones de tabla ── */
+  .table-actions .btn {
+    min-width: 0;
+    font-size: 0.78rem !important;
+    padding: 8px 10px !important;
+  }
+}

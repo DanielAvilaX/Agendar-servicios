@@ -1,0 +1,548 @@
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+}
+
+table th {
+  color: var(--text-primary);
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.col-check {
+  width: 44px;
+  text-align: center;
+}
+
+/* ── Status badges ─────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.status-badge.status-confirmed {
+  background: rgba(105, 219, 165, 0.14);
+  color: var(--success);
+  border: 1px solid rgba(105, 219, 165, 0.25);
+}
+
+.status-badge.status-pending {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.status-badge.status-pending.clickable {
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.status-badge.status-pending.clickable:hover {
+  background: rgba(255, 193, 7, 0.22);
+  transform: scale(1.04);
+}
+
+/* ── Checkbox personalizado ────────────────────────────── */
+.admin-checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--success);
+  cursor: pointer;
+}
+
+/* ── Toolbar de la tabla ───────────────────────────────── */
+.table-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.table-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.table-actions .btn {
+  font-size: 0.85rem;
+  padding: 9px 16px;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 32px !important;
+  color: var(--text-muted);
+}
+
+.slots-loading,
+.slots-error {
+  grid-column: 1 / -1;
+  padding: 24px;
+  text-align: center;
+}
+
+.slots-loading {
+  color: var(--text-muted);
+}
+
+.slots-error {
+  color: var(--danger);
+}
+
+/* ── Botón pequeño ─────────────────────────────────────── */
+.btn-sm {
+  font-size: 0.8rem !important;
+  padding: 7px 14px !important;
+}
+
+/* ── Tabs del admin ─────────────────────────────────────── */
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  width: fit-content;
+}
+
+.admin-tab {
+  padding: 10px 24px;
+  border-radius: calc(var(--radius-md) - 2px);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.admin-tab.active {
+  background: rgba(105, 219, 165, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(105, 219, 165, 0.2);
+}
+
+.admin-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+/* ── Calendario ─────────────────────────────────────────── */
+.cal-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.cal-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cal-month-label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 210px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.cal-nav-btn {
+  padding: 8px 14px !important;
+  font-size: 1.3rem !important;
+  line-height: 1;
+}
+
+.cal-grid-wrapper {
+  padding: 20px;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+
+.cal-weekdays span {
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 8px 0;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-loading {
+  grid-column: 1 / -1;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.cal-day {
+  min-height: 76px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cal-day:not(.cal-day--empty):hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-soft);
+}
+
+.cal-day--empty {
+  cursor: default;
+  min-height: 76px;
+}
+
+.cal-day--today .cal-day-num {
+  background: var(--success);
+  color: #0a0f1e;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.cal-day--selected {
+  background: rgba(105, 219, 165, 0.08) !important;
+  border-color: rgba(105, 219, 165, 0.3) !important;
+}
+
+.cal-day-num {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cal-event-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(105, 219, 165, 0.18);
+  color: var(--success);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border: 1px solid rgba(105, 219, 165, 0.3);
+}
+
+/* ── Header del detalle de día ─────────────────────────── */
+.day-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.day-detail-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Detalle de día ─────────────────────────────────────── */
+.appointment-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+}
+
+.appointment-row:last-child {
+  border-bottom: none;
+}
+
+.appt-time {
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 90px;
+  font-size: 0.9rem;
+}
+
+.appt-name {
+  flex: 1;
+  color: var(--text-primary);
+  min-width: 120px;
+}
+
+.appt-specialist {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+/* ── Especialidades ─────────────────────────────────────── */
+.specialty-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+}
+
+.specialty-card:last-child {
+  border-bottom: none;
+}
+
+.specialty-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specialty-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.specialty-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.specialty-badge,
+.specialist-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.specialty-badge.active,
+.specialist-badge.active {
+  background: rgba(105, 219, 165, 0.14);
+  color: var(--success);
+  border: 1px solid rgba(105, 219, 165, 0.25);
+}
+
+.specialty-badge.inactive,
+.specialist-badge.inactive {
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.specialty-actions,
+.specialist-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Especialistas ──────────────────────────────────────── */
+.specialist-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+}
+
+.specialist-card:last-child {
+  border-bottom: none;
+}
+
+.specialist-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specialist-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.specialist-specialty {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.specialist-user {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+/* ── Modal especialista ─────────────────────────────────── */
+.esp-modal-content {
+  max-width: 680px;
+  width: 100%;
+}
+
+/* ── Formulario de horario ──────────────────────────────── */
+.schedule-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.schedule-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  min-width: 110px;
+}
+
+.schedule-day-name {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.schedule-hours {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.schedule-hours select {
+  width: auto;
+  min-width: 100px;
+  padding: 8px 12px;
+}
+
+.schedule-to {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* ── Modal de confirmación ─────────────────────────────── */
+.confirm-modal-content {
+  max-width: 460px;
+  width: 100%;
+  padding: 36px;
+  text-align: center;
+}
+
+.confirm-modal-icon {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+}
+
+.confirm-modal-content h3 {
+  margin-bottom: 10px;
+}
+
+.confirm-modal-content p {
+  margin-bottom: 28px;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.modal-close {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.slot-btn {
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 16px;
+  font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.slot-btn.available {
+  background: rgba(105, 219, 165, 0.08);
+  color: var(--success);
+  cursor: pointer;
+}
+
+.slot-btn.available:hover {
+  transform: translateY(-2px);
+  border-color: var(--success);
+}
+
+.slot-btn.unavailable {
+  background: rgba(255, 107, 107, 0.08);
+  color: var(--danger);
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.booking-card {
+  padding: 32px;
+}
+
+.reservation-form {
+  margin-top: 26px;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  margin-top: 14px;
+}
