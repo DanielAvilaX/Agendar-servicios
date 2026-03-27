@@ -21,6 +21,10 @@ let _especialidadNombre = '';
 let _selectedHora       = null;
 let _specialists        = [];
 
+// ─── Loader HTML reutilizable ─────────────────────────────────────────────────
+
+const LOADER_HTML = '<div class="loader-dots"><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span></div>';
+
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -32,6 +36,7 @@ async function main() {
   document.getElementById('bookingDate').addEventListener('change', onDateChange);
   document.getElementById('openSlotsBtn').addEventListener('click', openSlotsModal);
   document.getElementById('reservationForm').addEventListener('submit', handleSubmit);
+  document.getElementById('successOkBtn').addEventListener('click', onSuccessOk);
 }
 
 // ─── Especialidades ───────────────────────────────────────────────────────────
@@ -68,7 +73,7 @@ async function onEspecialidadChange() {
   document.getElementById('especialistaGroup').classList.remove('hidden');
   document.getElementById('fechaGroup').classList.add('hidden');
   document.getElementById('openSlotsBtn').disabled = true;
-  setDateText('Cargando especialistas…');
+  setDateText(LOADER_HTML);
 
   try {
     _specialists = await getEspecialistasByEspecialidad(espId);
@@ -130,7 +135,7 @@ async function openSlotsModal() {
 
   document.getElementById('modalTitle').textContent =
     `${_especialistaNombre} — ${formatDateLabel(date)}`;
-  slotsContainer.innerHTML = '<p class="slots-loading">Cargando horarios…</p>';
+  slotsContainer.innerHTML = `<div class="slots-loading">${LOADER_HTML}</div>`;
   reservationForm.classList.add('hidden');
   ModalService.open();
 
@@ -207,7 +212,7 @@ async function handleSubmit(e) {
 
   submitBtn.disabled   = true;
   feedback.style.color = '';
-  feedback.textContent = 'Procesando…';
+  feedback.textContent = '';
 
   try {
     const available = await isSlotAvailable(date, _selectedHora, _especialistaId);
@@ -226,11 +231,13 @@ async function handleSubmit(e) {
       motivoConsulta: motivo
     });
 
-    feedback.style.color = 'var(--success)';
-    feedback.textContent = '¡Cita agendada exitosamente!';
     document.getElementById('reservationForm').reset();
     _selectedHora = null;
-    setTimeout(() => openSlotsModal(), 1500);
+
+    // Mostrar tarjeta de éxito
+    document.getElementById('slotsContainer').classList.add('hidden');
+    document.getElementById('reservationForm').classList.add('hidden');
+    document.getElementById('successNotification').classList.remove('hidden');
 
   } catch (err) {
     feedback.textContent   = err.message;
@@ -240,8 +247,17 @@ async function handleSubmit(e) {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function setDateText(text) {
-  document.getElementById('selectedDateText').textContent = text;
+function onSuccessOk() {
+  document.getElementById('successNotification').classList.add('hidden');
+  const sc = document.getElementById('slotsContainer');
+  sc.innerHTML = '';
+  sc.classList.remove('hidden');
+  document.getElementById('reservationForm').classList.add('hidden');
+  ModalService.close();
+}
+
+function setDateText(html) {
+  document.getElementById('selectedDateText').innerHTML = html;
 }
 
 main().catch(console.error);

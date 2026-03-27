@@ -25,7 +25,7 @@ export async function init() {
 
 export async function renderList() {
   const container = document.getElementById('espList');
-  container.innerHTML = '<p style="color:var(--text-muted);">Cargando…</p>';
+  container.innerHTML = '<div style="padding:24px;text-align:center;"><div class="loader-dots"><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span></div></div>';
 
   try {
     const items = await getEspecialidades();

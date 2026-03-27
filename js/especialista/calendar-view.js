@@ -39,7 +39,7 @@ async function loadAndRender() {
     `${MONTHS_ES[state.month - 1]} ${state.year}`;
 
   const grid = document.getElementById('calGrid');
-  grid.innerHTML = '<div class="cal-loading">Cargando…</div>';
+  grid.innerHTML = '<div class="cal-loading"><div class="loader-dots"><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span></div></div>';
 
   try {
     state.reservations = await getReservationsByMonth(

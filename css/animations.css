@@ -1,3 +1,21 @@
+/* ─────────────────────────────────────────────
+   animations.css
+   Animaciones y efectos visuales del proyecto.
+   Paleta: --success #69dba5 | --danger #ff6b6b | bg #0a0f1e
+───────────────────────────────────────────────
+
+   Índice:
+   1. fadeUp          — entrada de secciones
+   2. Loader dots     — 3 puntos rebotando (carga de datos)
+   3. Btn shimmer     — barrido + glow en botón primario
+   4. Glass border    — borde gradiente en paneles principales
+   5. Checkbox        — check personalizado con animación pop
+───────────────────────────────────────────── */
+
+
+/* ══════════════════════════════════════════
+   1. FADE UP — Entrada de secciones
+══════════════════════════════════════════ */
 .fade-in-up {
   opacity: 0;
   transform: translateY(28px);
@@ -9,4 +27,284 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+/* ══════════════════════════════════════════
+   2. LOADER DOTS — Tres puntos rebotando
+   Fuente: uiverse.io
+   Cambios: color #fff → var(--success) #69dba5
+            sombras rgba(0,0,0,0.9) → verde translúcido
+            tamaño reducido (14px) para caber en modales/grids
+══════════════════════════════════════════ */
+.loader-dots {
+  width: 80px;
+  height: 44px;
+  position: relative;
+  margin: 16px auto;
+}
+
+.loader-dot {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--success);
+  left: 15%;
+  transform-origin: 50%;
+  animation: loaderBounce 0.5s alternate infinite ease;
+}
+
+@keyframes loaderBounce {
+  0% {
+    top: 30px;
+    height: 5px;
+    border-radius: 50px 50px 25px 25px;
+    transform: scaleX(1.5);
+    opacity: 0.5;
+  }
+  40% {
+    height: 14px;
+    border-radius: 50%;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.loader-dot:nth-child(2) { left: 45%;          animation-delay: 0.15s; }
+.loader-dot:nth-child(3) { left: auto; right: 15%; animation-delay: 0.3s; }
+
+.loader-dot-shadow {
+  width: 14px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(105, 219, 165, 0.18);
+  position: absolute;
+  top: 36px;
+  left: 15%;
+  transform-origin: 50%;
+  filter: blur(1px);
+  animation: loaderShadow 0.5s alternate infinite ease;
+}
+
+@keyframes loaderShadow {
+  0%   { transform: scaleX(1.5); opacity: 0.4; }
+  40%  { transform: scaleX(1);   opacity: 0.25; }
+  100% { transform: scaleX(0.2); opacity: 0.1; }
+}
+
+.loader-dot-shadow:nth-child(4) { left: 45%;          animation-delay: 0.15s; }
+.loader-dot-shadow:nth-child(5) { left: auto; right: 15%; animation-delay: 0.3s; }
+
+
+/* ══════════════════════════════════════════
+   3. BOTÓN PRIMARIO — Shimmer + glow ambiental
+   Fuente: sparkle button de uiverse.io
+   Cambios: partículas SVG+JS → CSS puro con ::before
+            HSL(260°) purple → --success #69dba5 verde
+            shimmer blanco translúcido sobre fondo verde
+══════════════════════════════════════════ */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 18px rgba(105, 219, 165, 0.45),
+    0 0 40px rgba(105, 219, 165, 0.12),
+    0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover::before {
+  animation: btnShimmerSweep 0.55s ease forwards;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 0 8px rgba(105, 219, 165, 0.2);
+  transition-duration: 0.1s;
+}
+
+@keyframes btnShimmerSweep {
+  to { transform: translateX(280%); }
+}
+
+
+/* ══════════════════════════════════════════
+   4. PANELES GLASS — Borde gradiente animado
+   Fuente: card animation de uiverse.io by gharsh11032000
+   Cambios: rotate(8deg) eliminado (no aplica a paneles)
+            #e81cff pink + #40c9ff cyan →
+            #69dba5 verde + #60a5fa azul del sistema
+   Aplicado a paneles principales (no anidados)
+══════════════════════════════════════════ */
+.glass.cal-grid-wrapper,
+.glass.login-card,
+.glass.booking-card {
+  border: 1.5px solid transparent;
+  background:
+    rgba(255, 255, 255, 0.04) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07) 35%, transparent) border-box;
+  transition: background 0.5s ease, box-shadow 0.4s ease;
+}
+
+.glass.cal-grid-wrapper:hover,
+.glass.login-card:hover,
+.glass.booking-card:hover {
+  background:
+    rgba(255, 255, 255, 0.055) padding-box,
+    linear-gradient(
+      145deg,
+      transparent 25%,
+      rgba(105, 219, 165, 0.65) 60%,
+      rgba(96, 165, 250, 0.45) 100%
+    ) border-box;
+  box-shadow: 0 8px 48px rgba(105, 219, 165, 0.07);
+}
+
+
+/* ══════════════════════════════════════════
+   5. CHECKBOX — Personalizado con pop
+   Fuente: reject-checkbox de uiverse.io by m-muzammal
+   Cambios: circular 50px con gradiente multicolor →
+            cuadrado 18px, appearance:none, compatible con
+            <input type="checkbox"> directo (sin wrapper HTML)
+            gradiente rojo/rosa → verde --success del proyecto
+            sombra #ffbeb8 → rgba(105, 219, 165, ...)
+══════════════════════════════════════════ */
+.admin-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.admin-checkbox:hover {
+  border-color: rgba(105, 219, 165, 0.45);
+  background: rgba(105, 219, 165, 0.07);
+}
+
+/* Checked: fondo verde con palomita oscura (inline SVG) */
+.admin-checkbox:checked {
+  background-color: var(--success);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3L9 1' stroke='%230a0f1e' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55%;
+  border-color: var(--success);
+  box-shadow: 0 0 10px rgba(105, 219, 165, 0.35);
+  animation: checkboxPop 0.28s ease;
+}
+
+/* Indeterminado: guión horizontal para "seleccionar todos" parcial */
+.admin-checkbox:indeterminate {
+  background-color: rgba(105, 219, 165, 0.18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%2369dba5' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55%;
+  border-color: rgba(105, 219, 165, 0.5);
+}
+
+@keyframes checkboxPop {
+  0%   { transform: scale(0.75); }
+  55%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+
+/* ══════════════════════════════════════════
+   6. NOTIFICACIÓN DE ÉXITO — Cita agendada
+   Fuente: success card de uiverse.io by Yaya12085
+   Cambios: fondo blanco (#fff) → transparente (dentro de modal glass)
+            texto #066e29 verde oscuro → var(--success) #69dba5
+            texto #595b5f gris → var(--text-secondary)
+            botón secundario .track → eliminado (solo queda OK)
+            botón .dismiss X → eliminado (solo queda botón OK)
+            animación "animate" → renombrada "successPulse"
+══════════════════════════════════════════ */
+.success-notification {
+  padding: 32px 24px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.success-icon-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background: rgba(105, 219, 165, 0.12);
+  border: 1.5px solid rgba(105, 219, 165, 0.28);
+  flex-shrink: 0;
+  animation: successPulse 0.6s linear alternate-reverse infinite;
+}
+
+.success-icon-ring svg {
+  color: var(--success);
+  width: 2rem;
+  height: 2rem;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.success-title {
+  color: var(--success);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.success-message {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.success-ok-btn {
+  min-width: 180px;
+}
+
+@keyframes successPulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.09); }
 }

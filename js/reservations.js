@@ -124,7 +124,7 @@ export const ReservationsModule = {
     if (form)           form.classList.add('hidden');
     if (feedback)       feedback.textContent        = '';
     if (slotsContainer) slotsContainer.innerHTML    =
-      '<p class="slots-loading">Cargando horarios…</p>';
+      '<div class="slots-loading"><div class="loader-dots"><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span><span class="loader-dot-shadow"></span></div></div>';
 
     ModalService.open();
 

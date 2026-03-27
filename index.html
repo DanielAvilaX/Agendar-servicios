@@ -75,7 +75,7 @@
             <input type="date" id="bookingDate" />
           </div>
 
-          <p id="selectedDateText" class="helper-text">Selecciona una especialidad para comenzar.</p>
+          <div id="selectedDateText" class="helper-text">Selecciona una especialidad para comenzar.</div>
 
           <div class="form-actions" style="margin-top: 20px;">
             <button id="openSlotsBtn" class="btn btn-primary" disabled>Ver horarios disponibles</button>
@@ -99,6 +99,22 @@
       </div>
 
       <div id="slotsContainer" class="slots-grid"></div>
+
+      <!-- Notificación de éxito (se muestra tras agendar correctamente) -->
+      <div id="successNotification" class="success-notification hidden">
+        <div class="success-icon-ring">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="success-content">
+          <p class="success-title">¡Cita agendada!</p>
+          <p class="success-message">Tu cita ha sido registrada exitosamente.<br>Te esperamos el día seleccionado.</p>
+        </div>
+        <div>
+          <button id="successOkBtn" class="btn btn-primary success-ok-btn">Aceptar</button>
+        </div>
+      </div>
 
       <form id="reservationForm" class="reservation-form hidden">
         <h4>Confirmar cita</h4>
